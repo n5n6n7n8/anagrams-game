@@ -1,8 +1,16 @@
-import jsonData from "./words_dictionary.json" with { type: 'json' };
+import {newwordlist} from './newwordlist.js';
 
 let testbox = document.getElementById("Text");
+let foundbox = document.getElementById("found");
 let letters = ["R","S","T","A","E","C"];
+let foundwords = [""];
 
+// Example usage
+
+function findWord(str){
+    return newwordlist.includes(str);
+}
+console.log("ef");
 document.addEventListener("keydown", (e) => {
 
         // if (guessesRemaining === 0) {
@@ -11,13 +19,18 @@ document.addEventListener("keydown", (e) => {
         let pressedKey = String(e.key);
         if (pressedKey === "Backspace") {
             testbox.textContent = testbox.textContent.slice(0, -1);
-            console.log("deleted");
             return;
         }
 
         if (pressedKey === "Enter") {
-            console.log("submitted")
-            testbox.textContent += "\n";
+            if(!foundwords.includes(testbox.textContent) && isInLetters(testbox.textContent) && findWord(testbox.textContent)) {
+                foundbox.textContent += testbox.textContent + ", ";
+                foundwords.push(testbox.textContent);
+            }
+            else{
+                console.log("not found");
+            }
+            testbox.textContent = "";
             return;
         }
         let found = pressedKey.match(/[a-z]/gi)
@@ -26,11 +39,17 @@ document.addEventListener("keydown", (e) => {
             return;
         } 
         else {
-            console.log("added" + pressedKey);
             testbox.textContent += pressedKey;
         }
 })
 
-if(jsonData.find(word => word === "cat")) {
-    console.log("found cat");
+function isInLetters(s){
+    const sarray = s.split('');
+    for(let i = 0; i < sarray.length; i++){
+        if(!letters.includes(sarray[i].toUpperCase())){
+            return false;
+        }
+    }
+    return true;
 }
+
