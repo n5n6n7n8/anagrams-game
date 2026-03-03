@@ -1,11 +1,32 @@
 import {newwordlist} from './newwordlist.js';
 
+const randomLetters = true;
+
 let testbox = document.getElementById("Text");
 let foundbox = document.getElementById("found");
+let letterbox = document.getElementById("letters");
 let letters = ["R","S","T","A","E","C"];
 let foundwords = [""];
 
+
+setUpGame();
 // Example usage
+function setUpGame(){
+    if(randomLetters){
+        for(let i = 0; i < 6; i++){
+            let toAdd = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            while(letters.includes(toAdd)){
+                toAdd = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            }
+            letters[i] = toAdd;
+        }   
+    }
+    letterbox.textContent = "letters: ";
+    for (let i = 0; i < letters.length; i++){
+        letterbox.textContent += letters[i] + " ";
+    }
+}
+
 
 function findWord(str){
     return newwordlist.includes(str);

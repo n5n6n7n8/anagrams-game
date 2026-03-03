@@ -30100,6 +30100,8 @@ let newwordlist = [
 'duumvir',
 'duumviri',
 'duumvirs',
+'duvet',
+'duvets',
 'duvetine',
 'duvetines',
 'duvetyn',
