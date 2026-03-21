@@ -74,7 +74,7 @@ function setUpGame(){
             letters[i] = toAdd;
         }   
     }
-    letterbox.textContent = "letters: ";
+    letterbox.textContent = "";
     for (let i = 0; i < letters.length; i++){
         letterbox.textContent += letters[i] + " ";
     }

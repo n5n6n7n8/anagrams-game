@@ -1,16 +1,43 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Jumble</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <body>
+
 <div id="everything">  
-    <h1>Find a pangram using the given letters</h1>
-    <p id = "Text" style="white-space: pre-wrap;"></p>
-    <p id = "found" style="white-space: pre-wrap;">Found : </p>
-    <p id = "letters"></p>
+    <header>
+        <h1>LETTER  <span>  JUMBLE</span></h1>
+        <p class="subtitle">Make as many words as you can! (You can reuse letters)</p>
+    </header>
+
+    <main class="card">
+        <div class="stats-section">
+            <div class="stat-box">
+                <label>Letters</label>
+                <p id="letters"></p>
+            </div>
+            <div class="stat-box">
+                <label>Words Found:</label>
+                <p id="found"></p>
+            </div>
+        </div>
+        <div class="display-section">
+            <p id="Text"></p>
+        </div>
+
+
+    </main>
 </div>
 
 <script src="script.js" type="module"></script>
-
 </body>
 </html>
