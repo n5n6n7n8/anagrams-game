@@ -6,7 +6,7 @@ let days = Math.floor(t / (3600000)) - 8; //Get in hour time change from utc to 
 days = Math.floor(days/24);//Divide for days
 days -= 20454; //Represents days since Jan 1 2025. Used to distinguish time when getting words from Google Sheets
 
-const randomLetters = true;
+const randomLetters = false;
 
 let testbox = document.getElementById("Text");
 let foundbox = document.getElementById("found");
@@ -30,10 +30,13 @@ function handleResponse(csvText) {
         let sheetObjects = csvToObjects(csvText);
         // sheetObjects is now an Array of Objects
         lettersString = sheetObjects[days]["LETTERS"];
-        numLetters = sheetObjects[days]["NUMBEROFLETTERS"];
+        numLetters = parseInt(sheetObjects[days]["NUMBEROFLETTERS"]);
+        letters = lettersString.split('');
+        console.log("letters: ", letters);
+        // call setup game here so that it only happens after the spreadsheet is loaded, and the letters are set
         setUpGame();
         
-        console.log("Finished loaing spreadsheets");
+
         console.log(lettersString)
     }
 }
@@ -61,6 +64,7 @@ function csvToObjects(csv) {
 
 // Example usage
 function setUpGame(){
+    console.log("in setup game");
     if(randomLetters){
         for(let i = 0; i < 6; i++){
             let toAdd = String.fromCharCode(65 + Math.floor(Math.random() * 26));
@@ -80,7 +84,6 @@ function setUpGame(){
 function findWord(str){
     return newwordlist.includes(str);
 }
-console.log("ef");
 document.addEventListener("keydown", (e) => {
 
         // if (guessesRemaining === 0) {
@@ -92,8 +95,8 @@ document.addEventListener("keydown", (e) => {
             return;
         }
 
-        if (pressedKey === "Enter") {
-            if(!foundwords.includes(testbox.textContent) && isInLetters(testbox.textContent) && findWord(testbox.textContent)) {
+        if (pressedKey === "Enter") { //verify if real word
+            if(!foundwords.includes(testbox.textContent) && isInLetters(testbox.textContent) && findWord(testbox.textContent) && testbox.textContent.length > 2) {
                 foundbox.textContent += testbox.textContent + ", ";
                 foundwords.push(testbox.textContent);
             }
